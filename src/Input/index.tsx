@@ -3,37 +3,22 @@ import { clsx } from 'kotl'
 import { IconLoaderCircle } from '@/Icon/LoadingIcon'
 import { createFocusStyle } from '@/theme'
 
-type ButtonProps = ComponentProps<'button'> & {
-  variant?: 'solid' | 'soft' | 'outline' | 'text' | 'pure'
-  color?: 'primary' | 'success' | 'warning' | 'danger'
+type InputProps = ComponentProps<'input'> & {
+  state?: 'success' | 'warning' | 'danger'
   size?: 'sm' | 'md' | 'lg'
-  pill?: boolean
-  square?: boolean
-  block?: boolean
   loading?: boolean
   disabled?: boolean
-  icon?: ReactNode
+  prefix?: ReactNode
+  subfix?: ReactNode
 }
 
-export const Button: FC<ButtonProps> = props => {
-  const {
-    variant = 'default',
-    color = 'primary',
-    size = 'md',
-    pill,
-    square,
-    block,
-    loading,
-    disabled,
-    icon,
-    children,
-    ...others
-  } = props
+export const Button: FC<InputProps> = props => {
+  const { color = 'primary', size = 'md', loading, disabled, icon, children, ...others } = props
   return (
     <button
       {...others}
       className={clsx([
-        'inline-flex cursor-pointer appearance-none items-center justify-center whitespace-nowrap text-center font-medium outline-none transition-all focus:z-10 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+        `inline-flex cursor-pointer appearance-none items-center justify-center whitespace-nowrap text-center font-medium outline-none transition-all focus:z-10 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50`,
         createFocusStyle('outline', color),
         others.className,
         {

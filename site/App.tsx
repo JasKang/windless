@@ -10,8 +10,8 @@ export default function App() {
         <div className="container mx-auto">header</div>
       </div>
       <div className="container mx-auto flex min-h-[calc(100vh-3.5rem)]">
-        <Sidebar className="w-80">sidebar</Sidebar>
-        <div className="flex-auto">
+        <Sidebar className="w-80"></Sidebar>
+        <div className="flex-auto p-12">
           <Outlet />
         </div>
       </div>
