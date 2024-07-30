@@ -32,34 +32,25 @@
   --color-primary-deep-2: var(--color-blue-900);
 
   --color-success: var(--color-green-500);
-  --color-success-subtle: var(--color-green-50);
-  --color-success-subtle-hover: var(--color-green-100);
-  --color-success-bg-hover: var(--color-green-500);
-  --color-success-border: var(--color-green-600);
-  --color-success-solid: var(--color-green-600);
-  --color-success-solid-hover: var(--color-green-500);
-  --color-success-text: var(--color-green-700);
-  --color-success-text-contrast: var(--color-green-800);
+  --color-success-2: var(--color-green-600);
+  --color-success-light: var(--color-green-50);
+  --color-success-light-2: var(--color-green-100);
+  --color-success-deep: var(--color-green-800);
+  --color-success-deep-2: var(--color-green-900);
 
   --color-warning: var(--color-amber-500);
-  --color-warning-subtle: var(--color-amber-50);
-  --color-warning-subtle-hover: var(--color-amber-100);
-  --color-warning-bg-hover: var(--color-amber-500);
-  --color-warning-border: var(--color-amber-600);
-  --color-warning-solid: var(--color-amber-600);
-  --color-warning-solid-hover: var(--color-amber-500);
-  --color-warning-text: var(--color-amber-700);
-  --color-warning-text-contrast: var(--color-amber-800);
+  --color-warning-2: var(--color-amber-600);
+  --color-warning-light: var(--color-amber-50);
+  --color-warning-light-2: var(--color-amber-100);
+  --color-warning-deep: var(--color-amber-800);
+  --color-warning-deep-2: var(--color-amber-900);
 
   --color-danger: var(--color-red-500);
-  --color-danger-subtle: var(--color-red-50);
-  --color-danger-subtle-hover: var(--color-red-100);
-  --color-danger-bg-hover: var(--color-red-500);
-  --color-danger-border: var(--color-red-600);
-  --color-danger-solid: var(--color-red-600);
-  --color-danger-solid-hover: var(--color-red-500);
-  --color-danger-text: var(--color-red-700);
-  --color-danger-text-contrast: var(--color-red-800);
+  --color-danger-2: var(--color-red-600);
+  --color-danger-light: var(--color-red-50);
+  --color-danger-light-2: var(--color-red-100);
+  --color-danger-deep: var(--color-red-800);
+  --color-danger-deep-2: var(--color-red-900);
 }
 
 [data-theme='dark'] {

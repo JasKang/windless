@@ -1,8 +1,8 @@
-import type { ComponentProps, FC, HTMLAttributes } from 'react'
+import type { ComponentProps, FC } from 'react'
 import type { Prettify } from 'kotl'
 
 export type PureFC<T = {}> = FC<Prettify<T>>
-export type HtmlFC<T, D extends HTMLElement = HTMLDivElement> = FC<T & HTMLAttributes<D>>
+export type HtmlFC<D extends keyof JSX.IntrinsicElements, T> = FC<T & ComponentProps<D>>
 
 export type InputProps = Prettify<{
   label: string
