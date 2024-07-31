@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 import { Link, useLocation, useMatches } from 'react-router-dom'
 import { clsx } from 'kotl'
-import type { HtmlFC } from '@/shared/types'
+import type { DomFC } from '@/shared/types'
 
-export const Sidebar: HtmlFC<'div', {}> = props => {
+export const Sidebar: DomFC = props => {
   const location = useLocation()
   const matches = useMatches()
 

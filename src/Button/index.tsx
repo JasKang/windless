@@ -1,6 +1,6 @@
 import type { ComponentProps, FC, ReactNode } from 'react'
 import { clsx } from 'kotl'
-import { IconLoaderCircle } from '@/Icon/LoadingIcon'
+import LoadingIcon from '@/Icon/LoadingIcon'
 import { createFocusStyle } from '@/theme'
 
 type ButtonProps = ComponentProps<'button'> & {
@@ -84,8 +84,7 @@ export const Button: FC<ButtonProps> = props => {
     >
       {(loading || icon) && (
         <span className={clsx(['*:h-[1em] *:w-[1em]', children && !square ? 'mr-1.5' : ''])}>
-          <IconLoaderCircle v-if="loading" className="animate-spin" />
-          <slot v-else name="icon" />
+          {loading ? <LoadingIcon /> : icon}
         </span>
       )}
       {square && loading ? null : children}

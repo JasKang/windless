@@ -4,23 +4,28 @@ layout: asdf
 
 # Input
 
-import Button from '@/Button'
+import { useEffect, useState } from 'react'
+import { Demo } from '../components/Demo'
+import Input from '@/Input'
+import LoadingIcon from '@/Icon/LoadingIcon'
 
-<div className="mx-auto grid w-[400px] grid-cols-4 gap-2 rounded bg-white p-4 ring-1 shadow ring-slate-100">
-  <Button variant="solid">button</Button>
-  <Button variant="soft">button</Button>
-  <Button variant="outline">button</Button>
-  <Button variant="text">button</Button>
-  <Button variant="solid" color="success">
-    button
-  </Button>
-  <Button variant="soft" color="success">
-    button
-  </Button>
-  <Button variant="outline" color="success">
-    button
-  </Button>
-  <Button variant="text" color="success">
-    button
-  </Button>
+export function InputDemo() {
+  const [value, setValue] = useState()
+  return (
+    <div>
+      <div className="mb-4">value: {value}</div>
+      <Input value={value} onChange={setValue} />
+    </div>
+  )
+}
+
+<Demo>
+  <InputDemo />
+</Demo>
+
+<div className="my-8 mx-auto flex flex-col gap-8 rounded bg-white p-8 ring-1 shadow ring-slate-100">
+  <Input className="shadow" status="success" />
+  <Input status="warning" prefix={<LoadingIcon />} />
+  <Input status="warning" suffix={<LoadingIcon />} />
+  <Input status="danger" />
 </div>

@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import Button from './docs/button.mdx'
+import Input from './docs/input.mdx'
 import App from './App'
 import ErrorPage from './ErrorPage'
 
@@ -15,6 +16,10 @@ export const router = createBrowserRouter([
           {
             path: 'button',
             element: <Button />,
+          },
+          {
+            path: 'input',
+            element: <Input />,
           },
         ],
       },
