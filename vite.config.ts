@@ -34,7 +34,7 @@ export default defineConfig({
             return tree => {
               visit(tree, 'mdxJsxFlowElement', function (node, index, parent) {
                 if (node.name === 'Demo') {
-                  console.log(node.attributes, node.children)
+                  // console.log(node.attributes, node.children)
                   node.attributes.push({
                     type: 'mdxJsxAttribute',
                     name: 'code',
