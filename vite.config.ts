@@ -40,6 +40,13 @@ export default defineConfig({
                     name: 'code',
                     value: toMarkdown(node.children[0], { extensions: [mdxJsxToMarkdown()] }),
                   })
+                } else if (node.lang === 'jsx') {
+                  console.log(node)
+                  // node.attributes.push({
+                  //   type: 'mdxJsxAttribute',
+                  //   name: 'code',
+                  //   value: toMarkdown(node.children[0], { extensions: [mdxJsxToMarkdown()] }),
+                  // })
                 }
               })
               return tree

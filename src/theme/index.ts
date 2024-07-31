@@ -10,7 +10,7 @@ export function createFocusStyle(mode: 'ring' | 'outline', color: AliasColor = '
           danger: 'focus-visible:ring-danger',
         }[color]
       }
-    }`
+    `
     : ` focus-visible:outline-2 focus-visible:outline-offset-2 ${
         {
           primary: 'focus-visible:outline-primary',
@@ -18,6 +18,5 @@ export function createFocusStyle(mode: 'ring' | 'outline', color: AliasColor = '
           warning: 'focus-visible:outline-warning',
           danger: 'focus-visible:outline-danger',
         }[color]
-      }
-    }`
+      }`
 }

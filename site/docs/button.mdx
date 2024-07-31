@@ -5,22 +5,64 @@ layout: asdf
 # Button
 
 import Button from '@/Button'
+import { Demo } from '../components/Demo'
 
-<div className="grid w-[400px] grid-cols-4 gap-2 rounded bg-white p-4 ring-1 shadow ring-slate-100">
-  <Button variant="solid">button</Button>
-  <Button variant="soft">button</Button>
-  <Button variant="outline">button</Button>
-  <Button variant="text">button</Button>
-  <Button variant="solid" color="success">
-    button
-  </Button>
-  <Button variant="soft" color="success">
-    button
-  </Button>
-  <Button variant="outline" color="success">
-    button
-  </Button>
-  <Button variant="text" color="success">
-    button
-  </Button>
-</div>
+<Demo>
+  <div className="">
+
+    <Button>button</Button>
+
+  </div>
+</Demo>
+
+## solid
+
+<Demo>
+  <div className="grid w-[400px] grid-cols-4 gap-2">
+
+    <Button variant="solid" color="primary">button</Button>
+    <Button variant="solid" color="success">button</Button>
+    <Button variant="solid" color="warning">button</Button>
+    <Button variant="solid" color="danger">button</Button>
+
+  </div>
+</Demo>
+
+## soft
+
+<Demo>
+  <div className="grid w-[400px] grid-cols-4 gap-2">
+
+    <Button variant="soft" color='primary'>button</Button>
+    <Button variant="soft" color='success'>button</Button>
+    <Button variant="soft" color='warning'>button</Button>
+    <Button variant="soft" color='danger'>button</Button>
+
+  </div>
+</Demo>
+
+## outline
+
+<Demo>
+  <div className="grid w-[400px] grid-cols-4 gap-2">
+
+    <Button variant="outline" color='primary'>button</Button>
+    <Button variant="outline" color='success'>button</Button>
+    <Button variant="outline" color='warning'>button</Button>
+    <Button variant="outline" color='danger'>button</Button>
+
+  </div>
+</Demo>
+
+## text
+
+<Demo>
+  <div className="grid w-[400px] grid-cols-4 gap-2">
+
+    <Button variant="text" color='primary'>button</Button>
+    <Button variant="text" color='success'>button</Button>
+    <Button variant="text" color='warning'>button</Button>
+    <Button variant="text" color='danger'>button</Button>
+
+  </div>
+</Demo>
