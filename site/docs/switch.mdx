@@ -1,0 +1,30 @@
+---
+layout: asdf
+---
+
+# Input
+
+import { useEffect, useState } from 'react'
+import { Demo } from '../components/Demo'
+import Switch from '@/Switch'
+import LoadingIcon from '@/Icon/LoadingIcon'
+
+export function SwitchDemo() {
+  const [value, setValue] = useState()
+  return (
+    <div>
+      <div className="mb-4">value: {value}</div>
+      <Switch value={value} onChange={setValue} />
+    </div>
+  )
+}
+
+<Demo>
+  <SwitchDemo />
+</Demo>
+
+<div className="my-8 mx-auto flex flex-col gap-8 rounded bg-white p-8 ring-1 shadow ring-slate-100">
+  <Switch />
+  <Switch value={true} />
+  <Switch value={false} />
+</div>

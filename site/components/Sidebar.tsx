@@ -16,6 +16,7 @@ export const Sidebar: DomFC = props => {
   const data = [
     { label: 'Button', path: '/components/button' },
     { label: 'Input', path: '/components/input' },
+    { label: 'Switch', path: '/components/switch' },
   ]
   return (
     <div {...props} className={clsx(['scrollbar overflow-y-scroll', props.className])}>

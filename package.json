@@ -24,33 +24,33 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "ahooks": "^3.8.0",
     "kotl": "^2.1.4",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "ahooks": "^3.8.0"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@jaskang/eslint-config": "^3.2.1",
-    "@jaskang/tsconfig": "^1.0.1",
+    "@jaskang/eslint-config": "^3.2.2",
+    "@jaskang/tsconfig": "^1.0.2",
     "@mdx-js/rollup": "^3.0.1",
-    "@tailwindcss/vite": "^4.0.0-alpha.18",
+    "@tailwindcss/vite": "^4.0.0-alpha.19",
     "@types/mdx": "^2.0.13",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react-swc": "^3.5.0",
-    "eslint": "^9.6.0",
+    "@vitejs/plugin-react-swc": "^3.7.0",
+    "eslint": "^9.9.0",
     "mdast-util-mdx-jsx": "^3.1.2",
     "mdast-util-to-markdown": "^2.1.0",
-    "prettier-plugin-tailwindcss": "^0.6.5",
-    "react-router-dom": "^6.25.1",
+    "prettier-plugin-tailwindcss": "^0.6.6",
+    "react-router-dom": "^6.26.0",
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.0",
     "remark-mdx-frontmatter": "^5.0.0",
-    "tailwindcss": "^4.0.0-alpha.18",
-    "tsup": "^8.2.3",
-    "typescript": "^5.2.2",
+    "tailwindcss": "^4.0.0-alpha.19",
+    "tsup": "^8.2.4",
+    "typescript": "^5.5.4",
     "unist-util-visit": "^5.0.0",
-    "vite": "^5.3.4"
+    "vite": "^5.4.0"
   },
-  "packageManager": "pnpm@9.6.0"
+  "packageManager": "pnpm@9.7.0"
 }
