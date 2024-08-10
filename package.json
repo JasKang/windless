@@ -24,6 +24,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@floating-ui/react": "^0.26.22",
     "ahooks": "^3.8.0",
     "kotl": "^2.1.4",
     "react": "^18.3.1",

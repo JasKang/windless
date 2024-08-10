@@ -6,6 +6,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*", "tailwindcss/**/*", "site/**/*"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "tailwindcss/**/*", "site/**/*"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
