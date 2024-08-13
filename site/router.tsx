@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 import Button from './docs/button.mdx'
 import Input from './docs/input.mdx'
+import Popper from './docs/popper.mdx'
 import Switch from './docs/switch.mdx'
 import App from './App'
 import ErrorPage from './ErrorPage'
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
           {
             path: 'switch',
             element: <Switch />,
+          },
+          {
+            path: 'popper',
+            element: <Popper />,
           },
         ],
       },

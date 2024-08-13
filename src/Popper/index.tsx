@@ -1,25 +1,46 @@
-import { Children, cloneElement, type ComponentProps, type FC, type ReactElement } from 'react'
-import { useClick, useDismiss, useFloating, useFocus, useHover, useInteractions } from '@floating-ui/react'
+import { Children, cloneElement, type CSSProperties, type FC, type ReactElement } from 'react'
+import {
+  FloatingNode,
+  FloatingPortal,
+  FloatingTree,
+  useClick,
+  useDismiss,
+  useFloating,
+  useFloatingNodeId,
+  useFloatingParentNodeId,
+  useFocus,
+  useHover,
+  useInteractions,
+} from '@floating-ui/react'
 import useControllableValue from '../hooks/useControllableValue'
 
-type PopperProps = ComponentProps<'div'> & {
+type PopperProps = {
   open: boolean
   defaultOpen: boolean
   onOpenChange?: (value: boolean) => void
+  className?: string
+  style?: CSSProperties
+  children?: ReactElement
 }
 
-export const Popper: FC<PopperProps> = props => {
-  const { open: _, children, className, style, ...others } = props
+const PopperComponent: FC<PopperProps> = props => {
+  const { children, className, style } = props
 
   const element = Children.only(children) as ReactElement
 
-  const [value, setValue] = useControllableValue(props, {
+  const [open, setOpen] = useControllableValue(props, {
     valuePropName: 'open',
     defaultValuePropName: 'defaultOpen',
     defaultValue: false,
     trigger: 'onOpenChange',
   })
-  const { refs, floatingStyles, context } = useFloating()
+  const nodeId = useFloatingNodeId()
+
+  const { refs, floatingStyles, context } = useFloating({
+    nodeId,
+    open,
+    onOpenChange: setOpen,
+  })
   const hover = useHover(context)
   const focus = useFocus(context)
   const click = useClick(context)
@@ -27,15 +48,35 @@ export const Popper: FC<PopperProps> = props => {
   const dismiss = useDismiss(context)
   const { getReferenceProps, getFloatingProps } = useInteractions([hover, focus, click, dismiss])
 
-  const clickHandler = () => {
-    setValue(!value)
-  }
   return (
     <>
       {cloneElement(element, { ref: refs.setReference, ...getReferenceProps() })}
-      <div ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()} />
+      <FloatingNode id={nodeId}>
+        {open && (
+          <FloatingPortal>
+            <div
+              ref={refs.setFloating}
+              className={className}
+              style={{ ...style, ...floatingStyles }}
+              {...getFloatingProps()}
+            />
+          </FloatingPortal>
+        )}
+      </FloatingNode>
     </>
   )
+}
+
+const Popper: FC<PopperProps> = props => {
+  const parentId = useFloatingParentNodeId()
+  if (parentId === null) {
+    return (
+      <FloatingTree>
+        <PopperComponent {...props} />
+      </FloatingTree>
+    )
+  }
+  return <PopperComponent {...props} />
 }
 
 export default Popper
