@@ -1,4 +1,4 @@
-import type { ComponentProps, FC, ReactNode } from 'react'
+import { type ComponentProps, forwardRef, type ReactNode } from 'react'
 import { clsx } from 'kotl'
 import LoadingIcon from '@/Icon/LoadingIcon'
 import { createFocusStyle } from '@/theme'
@@ -15,7 +15,7 @@ type ButtonProps = ComponentProps<'button'> & {
   icon?: ReactNode
 }
 
-export const Button: FC<ButtonProps> = props => {
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const {
     variant = 'default',
     color = 'primary',
@@ -32,6 +32,7 @@ export const Button: FC<ButtonProps> = props => {
   return (
     <button
       {...others}
+      ref={ref}
       className={clsx([
         'inline-flex cursor-pointer appearance-none items-center justify-center whitespace-nowrap text-center font-medium outline-none transition-all focus:z-10 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
         createFocusStyle('outline', color),
@@ -90,6 +91,6 @@ export const Button: FC<ButtonProps> = props => {
       {square && loading ? null : children}
     </button>
   )
-}
+})
 
 export default Button

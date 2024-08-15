@@ -1,4 +1,4 @@
-import { Children, cloneElement, type CSSProperties, type FC, type ReactElement } from 'react'
+import { Children, cloneElement, type CSSProperties, type FC, type ReactElement, type ReactNode } from 'react'
 import {
   FloatingNode,
   FloatingPortal,
@@ -21,6 +21,7 @@ type PopperProps = {
   className?: string
   style?: CSSProperties
   children?: ReactElement
+  content?: ReactNode
 }
 
 const PopperComponent: FC<PopperProps> = props => {
@@ -59,7 +60,9 @@ const PopperComponent: FC<PopperProps> = props => {
               className={className}
               style={{ ...style, ...floatingStyles }}
               {...getFloatingProps()}
-            />
+            >
+              {props.content}
+            </div>
           </FloatingPortal>
         )}
       </FloatingNode>
