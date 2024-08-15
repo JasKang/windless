@@ -22,6 +22,7 @@ type PopperProps = {
   style?: CSSProperties
   children?: ReactElement
   content?: ReactNode
+  trigger?: 'hover' | 'focus' | 'click'
 }
 
 const PopperComponent: FC<PopperProps> = props => {
@@ -42,11 +43,18 @@ const PopperComponent: FC<PopperProps> = props => {
     open,
     onOpenChange: setOpen,
   })
-  const hover = useHover(context)
-  const focus = useFocus(context)
-  const click = useClick(context)
+  const hover = useHover(context, {
+    enabled: props.trigger === 'hover',
+  })
+  const focus = useFocus(context, {
+    enabled: props.trigger === 'focus',
+  })
+  const click = useClick(context, {
+    enabled: props.trigger === 'click',
+  })
 
   const dismiss = useDismiss(context)
+
   const { getReferenceProps, getFloatingProps } = useInteractions([hover, focus, click, dismiss])
 
   return (
