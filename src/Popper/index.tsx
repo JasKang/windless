@@ -1,4 +1,4 @@
-import { Children, cloneElement, type CSSProperties, type FC, type ReactElement, type ReactNode } from 'react'
+import { Children, cloneElement, type FC, type ReactElement, type ReactNode } from 'react'
 import {
   FloatingNode,
   FloatingPortal,
@@ -16,17 +16,15 @@ import useControllableValue from '../hooks/useControllableValue'
 
 type PopperProps = {
   open: boolean
-  defaultOpen: boolean
   onOpenChange?: (value: boolean) => void
-  className?: string
-  style?: CSSProperties
-  children?: ReactElement
+  defaultOpen?: boolean
+  children?: ReactNode
   content?: ReactNode
   trigger?: 'hover' | 'focus' | 'click'
 }
 
 const PopperComponent: FC<PopperProps> = props => {
-  const { children, className, style } = props
+  const { children } = props
 
   const element = Children.only(children) as ReactElement
 
@@ -63,12 +61,7 @@ const PopperComponent: FC<PopperProps> = props => {
       <FloatingNode id={nodeId}>
         {open && (
           <FloatingPortal>
-            <div
-              ref={refs.setFloating}
-              className={className}
-              style={{ ...style, ...floatingStyles }}
-              {...getFloatingProps()}
-            >
+            <div ref={refs.setFloating} className="bg-white shadow" style={floatingStyles} {...getFloatingProps()}>
               {props.content}
             </div>
           </FloatingPortal>
@@ -78,7 +71,7 @@ const PopperComponent: FC<PopperProps> = props => {
   )
 }
 
-const Popper: FC<PopperProps> = props => {
+export const Popper: FC<PopperProps> = props => {
   const parentId = useFloatingParentNodeId()
   if (parentId === null) {
     return (
