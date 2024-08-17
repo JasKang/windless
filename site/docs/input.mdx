@@ -6,7 +6,7 @@ layout: asdf
 
 import { useEffect, useState } from 'react'
 import { Demo } from '../components/Demo'
-import Input from '@/Input'
+import { Input } from '@/Input'
 import LoadingIcon from '@/Icon/LoadingIcon'
 
 export function InputDemo() {
@@ -24,8 +24,8 @@ export function InputDemo() {
 </Demo>
 
 <div className="my-8 mx-auto flex flex-col gap-8 rounded bg-white p-8 ring-1 shadow ring-slate-100">
-  <Input className="shadow" status="success" />
-  <Input status="warning" prefix={<LoadingIcon />} />
-  <Input status="warning" suffix={<LoadingIcon />} />
+  <Input className="shadow" status="success" placeholder="请输入" />
+  <Input status="warning" prefix={<LoadingIcon />} placeholder="请输入" />
+  <Input status="warning" suffix={<LoadingIcon />} placeholder="请输入" />
   <Input status="danger" />
 </div>

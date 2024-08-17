@@ -1,8 +1,12 @@
 import { Children, cloneElement, type FC, type ReactElement, type ReactNode } from 'react'
 import {
+  flip as flipMiddleware,
   FloatingNode,
   FloatingPortal,
   FloatingTree,
+  offset as offsetMiddleware,
+  type Placement,
+  size as sizeMiddleware,
   useClick,
   useDismiss,
   useFloating,
@@ -15,16 +19,19 @@ import {
 import useControllableValue from '../hooks/useControllableValue'
 
 type PopperProps = {
-  open: boolean
+  open?: boolean
   onOpenChange?: (value: boolean) => void
   defaultOpen?: boolean
-  children?: ReactNode
-  content?: ReactNode
   trigger?: 'hover' | 'focus' | 'click'
+  placement?: Placement
+  offset?: number
+  sizeMode?: 'reference-width'
+  content: ReactNode | (() => ReactNode)
+  children?: ReactNode
 }
 
 const PopperComponent: FC<PopperProps> = props => {
-  const { children } = props
+  const { trigger = 'click', placement, offset = 0, sizeMode, content, children } = props
 
   const element = Children.only(children) as ReactElement
 
@@ -40,15 +47,28 @@ const PopperComponent: FC<PopperProps> = props => {
     nodeId,
     open,
     onOpenChange: setOpen,
+    placement,
+    middleware: [
+      offsetMiddleware(offset),
+      flipMiddleware(),
+      sizeMode &&
+        sizeMiddleware({
+          apply({ rects, elements }) {
+            Object.assign(elements.floating.style, {
+              width: `${rects.reference.width}px`,
+            })
+          },
+        }),
+    ],
   })
   const hover = useHover(context, {
-    enabled: props.trigger === 'hover',
+    enabled: trigger === 'hover',
   })
   const focus = useFocus(context, {
-    enabled: props.trigger === 'focus',
+    enabled: trigger === 'focus',
   })
   const click = useClick(context, {
-    enabled: props.trigger === 'click',
+    enabled: trigger === 'click',
   })
 
   const dismiss = useDismiss(context)
@@ -62,7 +82,7 @@ const PopperComponent: FC<PopperProps> = props => {
         {open && (
           <FloatingPortal>
             <div ref={refs.setFloating} className="bg-white shadow" style={floatingStyles} {...getFloatingProps()}>
-              {props.content}
+              {typeof content === 'function' ? content() : content}
             </div>
           </FloatingPortal>
         )}
