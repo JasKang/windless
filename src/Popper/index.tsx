@@ -16,7 +16,7 @@ import {
   useHover,
   useInteractions,
 } from '@floating-ui/react'
-import useControllableValue from '../hooks/useControllableValue'
+import useValue from '../hooks/useValue'
 
 type PopperProps = {
   open?: boolean
@@ -35,7 +35,7 @@ const PopperComponent: FC<PopperProps> = props => {
 
   const element = Children.only(children) as ReactElement
 
-  const [open, setOpen] = useControllableValue(props, {
+  const [open, setOpen] = useValue(props, {
     valuePropName: 'open',
     defaultValuePropName: 'defaultOpen',
     defaultValue: false,

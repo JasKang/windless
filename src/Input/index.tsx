@@ -1,6 +1,6 @@
 import { type ComponentProps, forwardRef, type ReactNode } from 'react'
 import { clsx } from 'kotl'
-import useControllableValue from '../hooks/useControllableValue'
+import useValue from '../hooks/useValue'
 
 type InputBoxProps = ComponentProps<'div'> & {
   as?: 'div' | 'button'
@@ -21,7 +21,7 @@ type InputProps = InputBoxProps & {
 export const Input = forwardRef<HTMLDivElement, InputProps>((props, ref) => {
   const { value: _, placeholder, readOnly, allowClear, onChange, invalid, disabled, prefix, suffix, ...others } = props
 
-  const [value, setValue] = useControllableValue(props, {
+  const [value, setValue] = useValue(props, {
     defaultValue: '',
   })
   return (

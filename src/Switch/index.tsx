@@ -1,5 +1,5 @@
 import { type ComponentProps, type FC } from 'react'
-import useControllableValue from '../hooks/useControllableValue'
+import useValue from '../hooks/useValue'
 
 type SwitchProps = ComponentProps<'button'> & {
   value: boolean
@@ -10,7 +10,7 @@ type SwitchProps = ComponentProps<'button'> & {
 export const Switch: FC<SwitchProps> = props => {
   const { value: _, children, className, style, ...others } = props
 
-  const [value, setValue] = useControllableValue(props, {
+  const [value, setValue] = useValue(props, {
     defaultValue: false,
   })
   const clickHandler = () => {

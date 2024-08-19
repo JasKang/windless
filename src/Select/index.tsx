@@ -1,7 +1,9 @@
 import type { FC } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
 import { clsx } from 'kotl'
+import useValue from '@/hooks/useValue'
 import { InputBox } from '@/Input'
+import { Listbox } from '@/Listbox'
 import { Popper } from '@/Popper'
 
 type SelectProps = {
@@ -15,6 +17,8 @@ type SelectProps = {
 }
 
 export const Select: FC<SelectProps> = props => {
+  const [value, setValue] = useValue(props)
+
   return (
     <Popper
       trigger="click"
@@ -22,7 +26,15 @@ export const Select: FC<SelectProps> = props => {
       sizeMode="reference-width"
       offset={10}
       content={() => {
-        return <div className="ring-line flex max-h-80 flex-col rounded text-sm ring-1 shadow-sm">sdfs</div>
+        return (
+          <Listbox
+            items={[
+              { value: '1', label: 'Option 1' },
+              { value: '2', label: 'Option 2' },
+              { value: '3', label: 'Option 3' },
+            ]}
+          ></Listbox>
+        )
       }}
     >
       <InputBox as="button" suffix={<ChevronDownIcon className="mr-1 h-4 w-4 shrink-0" />}>
