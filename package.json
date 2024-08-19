@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@floating-ui/react": "^0.26.22",
+    "@headlessui/react": "^2.1.2",
     "@heroicons/react": "^2.1.5",
     "ahooks": "^3.8.1",
     "kotl": "^2.1.4",
