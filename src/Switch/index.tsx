@@ -1,34 +1,32 @@
-import { type ComponentProps, type FC } from 'react'
+import { type FC } from 'react'
+import { Switch as HlSwitch } from '@headlessui/react'
 import useValue from '../hooks/useValue'
 
-type SwitchProps = ComponentProps<'button'> & {
+type SwitchProps = {
   value: boolean
   defaultValue: boolean
   onChange?: (value: boolean) => void
+  disabled?: boolean
 }
 
 export const Switch: FC<SwitchProps> = props => {
-  const { value: _, children, className, style, ...others } = props
+  const { disabled } = props
 
   const [value, setValue] = useValue(props, {
     defaultValue: false,
   })
-  const clickHandler = () => {
-    setValue(!value)
-  }
   return (
-    <button
-      type="button"
-      className="data-[checked=true]:bg-primary focus-visible:ring-primary bg-input-accent focus-visible:ring-offset-background relative inline-flex h-6 w-11 cursor-pointer rounded-full border-2 border-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-      onClick={clickHandler}
-      data-checked={!!value}
-      {...others}
+    <HlSwitch
+      checked={value}
+      onChange={setValue}
+      disabled={disabled}
+      className="group data-[checked]:bg-primary bg-input-accent data-[focus]:ring-primary relative flex h-7 w-14 cursor-pointer rounded-full p-1 transition-colors duration-200 ease-in-out focus:outline-none data-[focus]:ring-2 data-[focus]:ring-offset-2 data-[disabled]:opacity-50"
     >
       <span
-        data-checked={!!value}
-        className="bg-background pointer-events-none relative inline-block h-5 w-5 transform rounded-full ring-0 shadow transition duration-200 ease-in-out data-[checked=true]:translate-x-5 data-[state=unchecked]:translate-x-0"
-      ></span>
-    </button>
+        aria-hidden="true"
+        className="pointer-events-none inline-block size-5 translate-x-0 rounded-full bg-white ring-0 shadow-lg transition duration-200 ease-in-out group-data-[checked]:translate-x-7"
+      />
+    </HlSwitch>
   )
 }
 
