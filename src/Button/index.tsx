@@ -1,9 +1,9 @@
-import { type ComponentProps, forwardRef, type ReactNode } from 'react'
+import { forwardRef, type ReactNode } from 'react'
+import { Button as HButton } from '@headlessui/react'
 import { clsx } from 'kotl'
 import LoadingIcon from '@/Icon/LoadingIcon'
-import { createFocusStyle } from '@/theme'
 
-type ButtonProps = ComponentProps<'button'> & {
+type ButtonProps = {
   variant?: 'solid' | 'soft' | 'outline' | 'text' | 'pure'
   color?: 'primary' | 'success' | 'warning' | 'danger'
   size?: 'sm' | 'md' | 'lg'
@@ -12,7 +12,12 @@ type ButtonProps = ComponentProps<'button'> & {
   block?: boolean
   loading?: boolean
   disabled?: boolean
+  autoFocus?: boolean
   icon?: ReactNode
+  className?: string
+  style?: React.CSSProperties
+  children?: ReactNode
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
@@ -25,50 +30,61 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
     block,
     loading,
     disabled,
+    autoFocus,
     icon,
+    className,
+    style,
     children,
-    ...others
+
+    onClick,
   } = props
   return (
-    <button
-      {...others}
+    <HButton
       ref={ref}
+      autoFocus={autoFocus}
+      disabled={disabled}
+      style={style}
+      onClick={onClick}
       className={clsx([
-        'inline-flex cursor-pointer appearance-none items-center justify-center whitespace-nowrap text-center font-medium outline-none transition-all focus:z-10 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
-        createFocusStyle('outline', color),
-        others.className,
+        'data-[focus]:ring-primary inline-flex cursor-pointer appearance-none items-center justify-center whitespace-nowrap text-center font-medium outline-none transition-all data-[focus]:ring-2 data-[focus]:ring-offset-2 data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50',
         {
-          default: `border-input-border text-foreground bg-input-background enabled-hover:bg-input-background-hover border shadow-sm`,
-          outline: `border-2 shadow-sm ${
+          primary: 'data-[focus]:ring-primary',
+          success: 'data-[focus]:ring-success',
+          warning: 'data-[focus]:ring-warning',
+          danger: 'data-[focus]:ring-danger',
+        }[color],
+        {
+          default: `border-input-border text-foreground bg-input-background data-[hover]:bg-input-background-hover border shadow-sm`,
+          outline: `bg-background border-2 shadow-sm ${
             {
-              primary: 'enabled-hover:bg-primary-light border-primary bg-background text-primary',
-              success: 'enabled-hover:bg-success-light border-success bg-background text-success',
-              warning: 'enabled-hover:bg-warning-light border-warning bg-background text-warning',
-              danger: 'enabled-hover:bg-danger-light border-danger bg-background text-danger',
+              primary: 'data-[hover]:bg-primary-light border-primary text-primary',
+              success: 'data-[hover]:bg-success-light border-success text-success',
+              warning: 'data-[hover]:bg-warning-light border-warning text-warning',
+              danger: 'data-[hover]:bg-danger-light border-danger text-danger',
             }[color]
           }`,
-          solid: `shadow-sm ${
+          solid: `text-white shadow-sm ${
             {
-              primary: 'bg-primary enabled-hover:bg-primary-2 text-white',
-              success: 'bg-success enabled-hover:bg-success-2 text-white',
-              warning: 'bg-warning enabled-hover:bg-warning-2 text-white',
-              danger: 'bg-danger enabled-hover:bg-danger-2 text-white',
+              primary: 'bg-primary data-[hover]:bg-primary-2',
+              success: 'bg-success data-[hover]:bg-success-2',
+              warning: 'bg-warning data-[hover]:bg-warning-2',
+              danger: 'bg-danger data-[hover]:bg-danger-2',
             }[color]
           }`,
           soft: `shadow-sm ${
             {
-              primary: 'bg-primary-light enabled-hover:bg-primary-light-2 text-primary',
-              success: 'bg-success-light enabled-hover:bg-success-light-2 text-success',
-              warning: 'bg-warning-light enabled-hover:bg-warning-light-2 text-warning',
-              danger: 'bg-danger-light enabled-hover:bg-danger-light-2 text-danger',
+              primary: 'bg-primary-light data-[hover]:bg-primary-light-2 text-primary',
+              success: 'bg-success-light data-[hover]:bg-success-light-2 text-success',
+              warning: 'bg-warning-light data-[hover]:bg-warning-light-2 text-warning',
+              danger: 'bg-danger-light data-[hover]:bg-danger-light-2 text-danger',
             }[color]
           }`,
           text: `${
             {
-              primary: 'enabled-hover:bg-primary-light text-primary',
-              success: 'enabled-hover:bg-success-light text-success',
-              warning: 'enabled-hover:bg-warning-light text-warning',
-              danger: 'enabled-hover:bg-danger-light text-danger',
+              primary: 'data-[hover]:bg-primary-light text-primary',
+              success: 'data-[hover]:bg-success-light text-success',
+              warning: 'data-[hover]:bg-warning-light text-warning',
+              danger: 'data-[hover]:bg-danger-light text-danger',
             }[color]
           }`,
           pure: '',
@@ -80,8 +96,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
         }[size],
         pill ? 'rounded-full' : 'rounded-md',
         !square && block ? 'w-full' : '',
+        className,
       ])}
-      disabled={disabled}
     >
       {(loading || icon) && (
         <span className={clsx(['*:h-[1em] *:w-[1em]', children && !square ? 'mr-1.5' : ''])}>
@@ -89,7 +105,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
         </span>
       )}
       {square && loading ? null : children}
-    </button>
+    </HButton>
   )
 })
 

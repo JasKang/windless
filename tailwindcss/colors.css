@@ -1,11 +1,4 @@
 @theme {
-  --color-*: initial;
-
-  --color-black: #000;
-  --color-white: #fff;
-}
-
-@theme {
   --color-amber-1: #fefdfb;
   --color-amber-2: #fefbe9;
   --color-amber-3: #fff7c2;

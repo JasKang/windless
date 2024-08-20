@@ -1,73 +1,45 @@
-import { type ComponentProps, forwardRef, type ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import { Input as HInput } from '@headlessui/react'
 import { clsx } from 'kotl'
 import useValue from '../hooks/useValue'
-type InputBoxProps = ComponentProps<'div'> & {
-  as?: 'div' | 'button'
+
+type InputProps = {
+  value?: string
+  defaultValue?: string
+  onChange?: (value: string) => void
+  placeholder?: string
+  readOnly?: boolean
+  allowClear?: boolean
   invalid?: boolean
   disabled?: boolean
   prefix?: ReactNode
   suffix?: ReactNode
 }
 
-type InputProps = InputBoxProps & {
-  value?: string
-  placeholder?: string
-  readOnly?: boolean
-  allowClear?: boolean
-  onChange?: (value: string) => void
-}
-
-export const InputOld = forwardRef<HTMLDivElement, InputProps>((props, ref) => {
-  const { value: _, placeholder, readOnly, allowClear, onChange, invalid, disabled, prefix, suffix, ...others } = props
-
-  const [value, setValue] = useValue(props, {
-    defaultValue: '',
-  })
+export const Input = (props: InputProps) => {
+  const { prefix, suffix, invalid, disabled, readOnly } = props
+  const [value, setValue] = useValue(props, { defaultValue: '' })
   return (
-    <InputBox invalid={invalid} disabled={disabled} prefix={prefix} suffix={suffix} {...others} ref={ref}>
+    <HInput
+      as="div"
+      invalid={invalid}
+      disabled={disabled}
+      className={clsx([
+        'focus-within:border-primary data-[invalid]:border-danger data-[invalid]:focus-within:ring-danger border-input-border focus-within:ring-primary data-[disabled]:bg-accent flex h-9 appearance-none items-center overflow-hidden rounded-md border text-left focus-within:z-10 focus-within:ring-1 focus-within:ring-offset-0 data-[disabled]:cursor-not-allowed data-[disabled]:opacity-60',
+      ])}
+    >
+      {prefix && <span className="text-mute flex h-full min-w-8 items-center justify-center">{prefix}</span>}
       <input
+        value={value}
+        disabled={disabled}
+        readOnly={readOnly}
+        onChange={e => setValue(e.target.value)}
         className={clsx([
           'placeholder:text-mute block w-full flex-1 cursor-[inherit] border-0 bg-transparent py-1.5 text-sm leading-snug focus:outline-none',
           { 'pl-3': !prefix, 'pr-3': !suffix },
         ])}
-        style={{ boxShadow: 'none' }}
-        autoComplete="off"
-        type="text"
-        value={value}
-        onChange={e => setValue(e.target.value)}
-        readOnly={readOnly}
-        disabled={disabled}
-        placeholder={placeholder}
       />
-    </InputBox>
-  )
-})
-
-export const InputBox = forwardRef<HTMLDivElement, InputBoxProps>((props, ref) => {
-  const { as = 'div', invalid, disabled, prefix, suffix, children, className, ...others } = props
-  const Component = as as any
-  return (
-    <Component
-      {...others}
-      ref={ref}
-      className={clsx(className, [
-        'bg-input-background focus-within:border-primary flex h-9 appearance-none items-center overflow-hidden rounded-md border text-left focus-within:z-10 focus-within:ring-1 focus-within:ring-offset-0 data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-60',
-        invalid ? 'border-danger focus-within:ring-danger' : 'border-input-border focus-within:ring-primary',
-      ])}
-      data-disabled={disabled}
-    >
-      {prefix && <span className="text-mute flex h-full min-w-8 items-center justify-center">{prefix}</span>}
-      {children}
       {suffix && <span className="text-mute flex h-full min-w-8 items-center justify-center">{suffix}</span>}
-    </Component>
-  )
-})
-
-export const Input = () => {
-  return (
-    <HInput as="div">
-      {({ focus, hover }) => <input className={clsx('border', focus && 'bg-blue-100', hover && 'shadow')} />}
     </HInput>
   )
 }

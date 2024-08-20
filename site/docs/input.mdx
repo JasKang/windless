@@ -25,7 +25,7 @@ export function InputDemo() {
 
 <div className="my-8 mx-auto flex flex-col gap-8 rounded bg-white p-8 ring-1 shadow ring-slate-100">
   <Input className="shadow" status="success" placeholder="请输入" />
-  <Input status="warning" prefix={<LoadingIcon />} placeholder="请输入" />
-  <Input status="warning" suffix={<LoadingIcon />} placeholder="请输入" />
-  <Input status="danger" />
+  <Input disabled prefix={<LoadingIcon />} placeholder="请输入" />
+  <Input invalid suffix={<LoadingIcon />} placeholder="请输入" />
+  <Input />
 </div>
