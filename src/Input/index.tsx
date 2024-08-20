@@ -1,7 +1,7 @@
 import { type ComponentProps, forwardRef, type ReactNode } from 'react'
+import { Input as HInput } from '@headlessui/react'
 import { clsx } from 'kotl'
 import useValue from '../hooks/useValue'
-
 type InputBoxProps = ComponentProps<'div'> & {
   as?: 'div' | 'button'
   invalid?: boolean
@@ -18,7 +18,7 @@ type InputProps = InputBoxProps & {
   onChange?: (value: string) => void
 }
 
-export const Input = forwardRef<HTMLDivElement, InputProps>((props, ref) => {
+export const InputOld = forwardRef<HTMLDivElement, InputProps>((props, ref) => {
   const { value: _, placeholder, readOnly, allowClear, onChange, invalid, disabled, prefix, suffix, ...others } = props
 
   const [value, setValue] = useValue(props, {
@@ -63,3 +63,11 @@ export const InputBox = forwardRef<HTMLDivElement, InputBoxProps>((props, ref) =
     </Component>
   )
 })
+
+export const Input = () => {
+  return (
+    <HInput as="div">
+      {({ focus, hover }) => <input className={clsx('border', focus && 'bg-blue-100', hover && 'shadow')} />}
+    </HInput>
+  )
+}
