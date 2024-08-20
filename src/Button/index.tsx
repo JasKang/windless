@@ -46,7 +46,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
       style={style}
       onClick={onClick}
       className={clsx([
-        'data-[focus]:ring-primary inline-flex cursor-pointer appearance-none items-center justify-center whitespace-nowrap text-center font-medium outline-none transition-all data-[focus]:ring-2 data-[focus]:ring-offset-2 data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50',
+        'inline-flex cursor-pointer appearance-none items-center justify-center whitespace-nowrap text-center font-medium outline-none transition-all data-[focus]:ring-2 data-[focus]:ring-offset-2 data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50',
         {
           primary: 'data-[focus]:ring-primary',
           success: 'data-[focus]:ring-success',
