@@ -1,19 +1,19 @@
 import { type FC } from 'react'
-import { Listbox, ListboxButton, ListboxOption, ListboxOptions, type ListboxProps } from '@headlessui/react'
+import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
 import { clsx } from 'kotl'
 import useValue from '@/hooks/useValue'
 
-type SelectProps = ListboxProps & {
+type SelectProps = {
   value?: string | number
-  onChange?: (value: string | number) => void
   defaultValue?: string | number
-  options: Array<{
-    value: string | number
-    label: string
-    disabled?: boolean
-  }>
+  onChange?: (value: string | number) => void
+  options: Array<{ value: string | number; label: string; disabled?: boolean }>
   placeholder?: string
+  disabled?: boolean
+  invalid?: boolean
+  name?: string
+  multiple?: boolean
 }
 
 function compareOption(a: string, b: string) {
@@ -28,7 +28,7 @@ export const Select: FC<SelectProps> = props => {
   const current = options.find(options => options.value === value)
 
   return (
-    <Listbox by={compareOption} value={value} defaultValue={defaultValue} onChange={val => setValue(val)} {...others}>
+    <Listbox by={compareOption} value={value} onChange={val => setValue(val)} {...others}>
       <ListboxButton
         className={clsx([
           'bg-input-background border-input-border flex h-9 cursor-pointer appearance-none items-center overflow-hidden rounded-md border pl-3 text-left transition-colors data-[disabled]:cursor-not-allowed data-[disabled]:opacity-60',
@@ -53,19 +53,19 @@ export const Select: FC<SelectProps> = props => {
         ])}
       >
         {options.map(item => (
-          <>
-            <ListboxOption
-              key={item.value}
-              value={item.value}
-              disabled={item.disabled}
-              className="group data-[focus]:bg-input-background-hover flex min-h-9 w-full items-center gap-1 rounded"
-            >
-              <div className="flex flex-1 items-center overflow-hidden text-nowrap pl-2">
-                <span className="w-full text-ellipsis text-nowrap group-data-[selected]:font-medium">{item.label}</span>
-              </div>
-              <CheckIcon className="invisible mr-2 h-4 w-4 shrink-0 group-data-[selected]:visible" />
-            </ListboxOption>
-          </>
+          <ListboxOption
+            key={item.value}
+            value={item.value}
+            disabled={item.disabled}
+            className="group data-[focus]:bg-input-background-hover flex h-9 w-full items-center gap-1 rounded"
+          >
+            <div className="flex flex-1 items-center overflow-hidden text-nowrap pl-2">
+              <span className="group-data-[selected]:text-primary w-full text-ellipsis text-nowrap group-data-[selected]:font-medium">
+                {item.label}
+              </span>
+            </div>
+            <CheckIcon className="invisible mr-2 h-4 w-4 shrink-0 group-data-[selected]:visible" />
+          </ListboxOption>
         ))}
       </ListboxOptions>
     </Listbox>

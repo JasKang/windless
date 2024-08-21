@@ -2,7 +2,13 @@ import type { Prettify } from 'kotl'
 import type { ComponentProps, FC } from 'react'
 
 export type PureFC<T = {}> = FC<Prettify<T>>
-export type DomFC<T = {}, D extends keyof JSX.IntrinsicElements = 'div'> = FC<T & ComponentProps<D>>
+export type DomProps<T = {}> = Prettify<
+  T & {
+    children?: React.ReactNode
+    className?: string
+    style?: React.CSSProperties
+  }
+>
 
 type GetEventHandlers<T extends keyof JSX.IntrinsicElements> = Extract<keyof JSX.IntrinsicElements[T], `on${string}`>
 
